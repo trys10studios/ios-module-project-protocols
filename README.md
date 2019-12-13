@@ -14,7 +14,7 @@ The steps listed below match numbered steps in the playground. They will be list
 6. Create a `struct` to model a deck of cards. It should be called `Deck` and have an array of `Card` objects as a constant property. A custom `init` function should be created that initializes the array with a card of each rank and suit. You'll want to iterate over all ranks, and then over all suits (this is an example of _nested `for` loops_). See the next 2 steps before you continue with the nested loops.
 7. In the rank enum, add a static computed property that returns all the ranks in an array. Name this property `allRanks`. This is needed because you can't iterate over all cases from an enum automatically.
 8. In the suit enum, add a static computed property that returns all the suits in an array. Name this property `allSuits`.
-9. Back to the `Deck` and the nested loops. Now that you have a way to get arrays of all rank values and all suit values, create 2 `for` loops in the `init` method, one nested inside the other, where you iterate over each value of rank, and then iterate over each value of suit. See an example below to get an idea of how this will work. Imagine an enum that contains the 4 cardinal directions, and imagine that enum has a property `allDirections` that returns an array of them.
+9. Back to the `Deck` and the nested loops. Now that you have a way to get arrays of all rank values and all suit values, create 2 `for` loops in the `init` method, one nested inside the other, where you iterate over each value of rank, and then iterate over each value of suit. See an example below to get an idea of how this will work. Imagine an enum that contains the 4 cardinal directions, and imagine that enum has a property `allDirections` that returns an array of them. Create a variable in the initializer like this: `var cards: [Card] = []`. Append the card that you create inside of the nested for loops to this array. After the loop, set the value of `self.cards` constant that you made in step 6 to this new array variable.
     ```swift
     for direction in Compass.allDirections {
 
@@ -38,6 +38,7 @@ The steps listed below match numbered steps in the playground. They will be list
     * Ends in a tie, something like, "Round ends in a tie with 3 of clubs."
     * Player 1 wins with a higher card, e.g. "Player 1 wins with 8 of hearts."
     * Player 2 wins with a higher card, e.g. "Player 2 wins with king of diamonds."
+    * As an **optional stretch goal**, you could also check if the card has the same rank but not the same suit.
 20. Create a class called `CardGameTracker` that conforms to the `CardGameDelegate` protocol. Implement the two required functions: `gameDidStart` and `game(player1DidDraw:player2DidDraw)`. Model `gameDidStart` after the same method in the guided project from today. As for the other method, have it print a message like the following:
     * "Player 1 drew a 6 of hearts, player 2 drew a jack of spades."
 21. Time to test all the types you've created. Create an instance of the `HighLow` class. Set the `delegate` property of that object to an instance of `CardGameTracker`. Lastly, call the `play()` method on the game object. It should print out to the console something that looks similar to the following:
