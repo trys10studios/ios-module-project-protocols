@@ -26,10 +26,7 @@ The steps listed below match numbered steps in the playground. They will be list
 12. Create a protocol for a `CardGame`. It should have two requirements:
     * a gettable `deck` property
     * a `play()` method
-13. Create a protocol for tracking a card game as a delegate called `CardGameDelegate`. It should have two functional requirements:
-    * a function called `gameDidStart` that takes a `CardGame` as an argument
-    * a function with the following signature: `game(player1DidDraw card1: Card, player2DidDraw card2: Card)`
-14. Create a class called `HighLow` that conforms to the `CardGame` protocol. It should have an initialized `Deck` as a property, as well as an optional delegate property of type `CardGameDelegate`.
+14. Create a class called `HighLow` that conforms to the `CardGame` protocol. It should have an initialized `Deck` as a property.
 15. As part of the protocol conformance, implement a method called `play()`. The method should draw 2 cards from the deck, one for player 1 and one for player 2. These cards will then be compared to see which one is higher. The winning player will be printed along with a description of the winning card. Work will need to be done to the `Suit` and `Rank` types above, so see the next couple steps before continuing with this step.
 16. Take a look at the Swift docs for the [Comparable](https://developer.apple.com/documentation/swift/comparable) protocol. In particular, look at the two functions called `<` and `==`.
 17. Make the `Rank` type conform to the `Comparable` protocol. Implement the `<` and `==` methods such that they compare the `rawValue` of the `lhs` and `rhs` arguments passed in. This will allow us to compare two rank values with each other and determine whether they are equal, or if not, which one is larger.
@@ -38,10 +35,22 @@ The steps listed below match numbered steps in the playground. They will be list
     * Ends in a tie, something like, "Round ends in a tie with 3 of clubs."
     * Player 1 wins with a higher card, e.g. "Player 1 wins with 8 of hearts."
     * Player 2 wins with a higher card, e.g. "Player 2 wins with king of diamonds."
-    * As an **optional stretch goal**, you could also check if the card has the same rank but not the same suit.
-20. Create a class called `CardGameTracker` that conforms to the `CardGameDelegate` protocol. Implement the two required functions: `gameDidStart` and `game(player1DidDraw:player2DidDraw)`. Model `gameDidStart` after the same method in the guided project from today. As for the other method, have it print a message like the following:
+ 20. Time to test all the types you've created. Create an instance of the `HighLow` class. Lastly, call the `play()` method on the game object.
+
+### Stretch Goals (Optional): 
+
+19. (continued)
+    * You could also check if the card has the same rank but not the same suit.
+
+* Create a protocol for tracking a card game as a delegate called `CardGameDelegate`. It should have two functional requirements:
+    * a function called `gameDidStart` that takes a `CardGame` as an argument
+    * a function with the following signature: `game(player1DidDraw card1: Card, player2DidDraw card2: Card)`
+* In the `HighLow` class, create a variable called `delegate` of type `CardGameDelegate?`.
+   
+* Create a class called `CardGameTracker` that conforms to the `CardGameDelegate` protocol. Implement the two required functions: `gameDidStart` and `game(player1DidDraw:player2DidDraw)`. Model `gameDidStart` after the same method in the guided project from today. As for the other method, have it print a message like the following:
     * "Player 1 drew a 6 of hearts, player 2 drew a jack of spades."
-21. Time to test all the types you've created. Create an instance of the `HighLow` class. Set the `delegate` property of that object to an instance of `CardGameTracker`. Lastly, call the `play()` method on the game object. It should print out to the console something that looks similar to the following:
+    
+* Set the `delegate` property of the `HighLow` object you created in step 20 to an instance of `CardGameTracker`. You should get something like this once the game's `play()` method runs:
     ```
     Started a new game of High Low
     Player 1 drew a 2 of diamonds, player 2 drew a ace of diamonds.
